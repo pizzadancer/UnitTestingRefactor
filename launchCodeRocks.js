@@ -18,21 +18,25 @@ function launchOutput(num){
     "0,0,0" : "Rutabagas! That doesn't work." // NOT divisble by 2, 3, AND 5
   }
 
-  // Loop through the divisors[2,3,5] and return whether the number is divisble by any value
+  // Loop through the divisors[2,3,5],
+  //  check if the num variable is divisible by each divisor
+  //  push the boolean result to the created booleanResult array
   for (let i = 0; i < divisorArray.length; i++) {
     booleanResult.push(isDivisible(num, divisorArray[i]));
   }
+
+  // With the booleanResult of the looped divisibilityCheck{isDivisible},
+  //  convert the booleans into numeric values {1 = true, 0 = false}, 
+  //  then cast into a String
   let booleanResultNum = String(booleanToNum(booleanResult));
   return returnMessages[booleanResultNum];
-  
-
-
 }
 
 function isDivisible(num, divisor) {
   return num % divisor === 0;
 }
 
+// Converts boolean values into numeric representations {1 = true, 0 = false} 
 function booleanToNum(bools) {
   let booleanNum = []
   for (let i = 0; i < bools.length; i++) {
@@ -44,5 +48,6 @@ function booleanToNum(bools) {
   }
   return booleanNum;
 }
-// divisbility 
+
+
 module.exports = launchOutput;
