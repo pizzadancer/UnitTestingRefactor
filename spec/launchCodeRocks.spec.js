@@ -30,7 +30,7 @@ describe("launchOutput", function(){
 
   it("should return 'Launch Rocks!' when passed a number that is divisible by 2 AND 5", function() {
     let result = launchOutput(10);
-    expect(result).toEqual('Launch Rocks! (CRASH!!!!)');
+    expect(result).toEqual('Launch Rocks!');
   });
 
   it("should return 'LaunchCode Rocks!' when passed a number that is divisible by 2, 3, AND 5", function() {
