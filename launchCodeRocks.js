@@ -1,50 +1,62 @@
 function launchOutput(num){
-  // When passed a number that is ONLY divisible by 2, return 'Launch!'
-  // if (isDivisible(num, 3) && !isDivisible(num, 2) && !isDivisible(num, 5)) {
-  //   return 'Code!';
-  // }
+ 
   let conditionsForValidity;
   let winningStatement;
   let validity;
+
   // When passed a number that is ONLY divisible by 2, return 'Launch!'
   conditionsForValidity = [1, 0, 0];
   winningStatement = 'Launch!';
   valid = validityCheck(num, conditionsForValidity, winningStatement);
-  if (valid !== undefined) {
-    return valid;
-  }
+  if (valid === winningStatement) { return valid }
 
   
-  
   // When passed a number that is ONLY divisible by 3, return 'Code!'
-  if (num % 2 !== 0 && num % 3 === 0 && num % 5 !== 0) {
-    return 'Code!';
-  }
+  conditionsForValidity = [0, 1, 0];
+  winningStatement = 'Code!';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+
+
   // When passed a number that is ONLY divisible by 5, return 'Rocks!'
-  if (num % 5 === 0 && num % 2 !== 0 && num % 3 !== 0) {
-    return 'Rocks!';
-  }
+  conditionsForValidity = [0, 0, 1];
+  winningStatement = 'Rocks!';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+
+ 
   // When passed a number that is divisible by 2 AND 3, return 'LaunchCode!'
-  if (num % 3 === 0 && num % 2 === 0 && num % 5 !== 0) {
-    return 'LaunchCode!';
-  }
+  conditionsForValidity = [1, 1, 0];
+  winningStatement = 'LaunchCode!';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+
+
   // When passed a number that is divisible by 3 AND 5, return 'Code Rocks!'
-  if (num % 3 === 0 && num % 2 !== 0 && num % 5 === 0) {
-    return 'Code Rocks!';
-  }
+  conditionsForValidity = [0, 1, 1];
+  winningStatement = 'Code Rocks!';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+ 
   // When passed a number that is divisible by 2 AND 5, return 'Launch Rocks!'
-  if (num % 3 !== 0 && num % 2 === 0 && num % 5 === 0) {
-    return 'Launch Rocks! (CRASH!!!!)';
-  }
-  // When passed a number that is divisible by 2, 3, AND 5, return 'LaunchCode Rocks!'
-  if (num % 3 === 0 && num % 2 === 0 && num % 5 === 0) {
-    return 'LaunchCode Rocks!';
-  } 
-  // When passed a number that is NOT divisible by 2, 3, or 5, return 'Rutabagas! That doesn't work.'
-  if (num % 3 !== 0 && num % 2 !== 0 && num % 5 !== 0) {
-    return "Rutabagas! That doesn't work.";
-  } 
+  conditionsForValidity = [1, 0, 1];
+  winningStatement = 'Launch Rocks! (CRASH!!!!)';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+
   
+  // When passed a number that is divisible by 2, 3, AND 5, return 'LaunchCode Rocks!'
+  conditionsForValidity = [1, 1, 1];
+  winningStatement = 'LaunchCode Rocks!';
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+  
+  // When passed a number that is NOT divisible by 2, 3, or 5, return 'Rutabagas! That doesn't work.'
+  conditionsForValidity = [0, 0, 0];
+  winningStatement = "Rutabagas! That doesn't work.";
+  valid = validityCheck(num, conditionsForValidity, winningStatement);
+  if (valid === winningStatement) { return valid }
+
 }
 
 
@@ -55,15 +67,17 @@ function validityCheck(num, conditionsForValidity, winningStatement) {
   let divisorArray = [2, 3, 5];
   let booleanResult = [];
   
-  // divByLoop(num)
+  // Loop through the divisors[2,3,5] and return whether the number is divisble by any
   for (let i = 0; i < divisorArray.length; i++) {
     booleanResult.push(isDivisible(num, divisorArray[i]));
   }
 
-  // convert boolean result to numeric values of 1 = true, 0 = false
+  // With the divisibilityResult,
+  // convert the result into numeric values {1 = true, 0 = false}
   let booleanResultNum = booleanToNum(booleanResult);
   
-  // check if all values are equal, return true if they are, false if not
+  // Check if the booleanResult for divisiblity is equal to the valid conditions,
+  // if yes, return true; if no, return false
   let resultCount = 0;
   for (let i = 0; i < booleanResultNum.length; i++) {
     if (booleanResultNum[i] === conditionsForValidity[i]) {
@@ -71,6 +85,7 @@ function validityCheck(num, conditionsForValidity, winningStatement) {
     }
   }
 
+  // if the resultCount is 3, that means the result is fully equal to 
   if (resultCount === 3) {
     return winningStatement;
   } 
@@ -82,17 +97,15 @@ function isDivisible(num, divisor) {
 }
 
 function booleanToNum(bools) {
-  // console.log("bools before conversion: "  + bools);
-  let newBool= []
+  let booleanNum = []
   for (let i = 0; i < bools.length; i++) {
     if (bools[i] === true) {
-      newBool.push(1);    
+      booleanNum.push(1);    
     } else {
-      newBool.push(0);
+      booleanNum.push(0);
     }
   }
-  // console.log("newBool: " + newBool);
-  return newBool;
+  return booleanNum;
 }
 // divisbility 
 module.exports = launchOutput;
